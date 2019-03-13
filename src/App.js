@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Table from './Table';
+import LifeCycle from './LifeCycle';
 
 class App extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class App extends Component {
       }
     })
     .then(res => res.json())
-    .then(data => console.log(data));
+    // .then(data => console.log(data));
   }
 
   render() {
@@ -60,6 +61,7 @@ class App extends Component {
       <div className="App">
         <h1>Hello React!</h1>
         <button onClick={() => this.handler()}>test</button>
+        <LifeCycle></LifeCycle>
         <Table data={this.state.tableData} removeRow={this.removeRow}></Table>
       </div>
     );
