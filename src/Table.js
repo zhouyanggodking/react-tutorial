@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
+import './Table.css';
 
-const TableHeader = () => {
-  return (
-    <div>table header</div>
-  );
+const TableHeader = (props) => {
+  const headers = props.data.map((header, index) => {
+    return (
+      <div key={index}>{header}</div>
+    )
+  });
+  return <div className="row">{headers}</div>
 };
 
-const TableBody = () => {
+const TableBody = (props) => {
+  const rows = props.data.map((row, index) =>{
+    return (
+      <div className="row" key={index}>
+        <div>{row.name}</div>
+        <div>{row.title}</div>
+      </div>
+    );
+  });
   return (
-    <div>table body</div>
+    <div>{rows}</div>
   );
 };
 
 class Table extends Component {
   render() {
+    const { data } = this.props;
     return (
       <div className="table">
-        <TableHeader></TableHeader>
-        <TableBody></TableBody>
+        <TableHeader data={data.headerData}></TableHeader>
+        <TableBody data={data.bodyData}></TableBody>
       </div>
     );
   }
