@@ -3,25 +3,48 @@ import './App.css';
 import Table from './Table';
 
 class App extends Component {
-  render() {
-    const data = {
-      headerData: ['name', 'title'],
-      bodyData: [
-        {
-          name: 'godking',
-          title: 'SE'
-        },
-        {
-          name:'oceansky',
-          title: 'MGR'
-        }
-      ]
-    }
+  constructor() {
+    super();
+    this.state = {
+      tableData: {
+        headerData: ['name', 'title', 'remove'],
+        bodyData: [
+          {
+            name: 'godking',
+            title: 'SE'
+          },
+          {
+            name:'oceansky',
+            title: 'MGR'
+          }
+        ]      
+      }
+    };
+    // This binding is necessary to make `this` work in the callback
+    this.removeRow = this.removeRow.bind(this); // necessary
+  }
 
+  removeRow(index) {
+    const { tableData } = this.state;
+    const bodyData = tableData.bodyData.filter((row, i) => i !== index);
+    this.setState({
+      tableData: {
+        headerData: tableData.headerData,
+        bodyData
+      }
+    });
+  }
+
+  handler() {
+    console.log(this)
+  }
+
+  render() {
     return (
       <div className="App">
         <h1>Hello React!</h1>
-        <Table data={data}></Table>
+        <button onClick={() => this.handler()}>test</button>
+        <Table data={this.state.tableData} removeRow={this.removeRow}></Table>
       </div>
     );
   }
