@@ -39,6 +39,22 @@ class App extends Component {
     console.log(this)
   }
 
+  componentDidMount() {
+    fetch('/api/recommendation', {
+      method: 'post',
+      body: JSON.stringify({
+        maxCount:20,
+        question:'十年十倍股',
+        type:'all'
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+  }
+
   render() {
     return (
       <div className="App">
